@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-contrib/cors"
@@ -31,7 +32,12 @@ func main() {
     r.DELETE("/todos/:id", deleteTodo) // Todo削除
 
     // サーバー起動
-    r.Run(":8080")
+   port := os.Getenv("PORT")
+if port == "" {
+    port = "8080" // デフォルト値
+}
+r.Run(":" + port)
+
 }
 
 // Todo一覧取得 (GET /todos)
