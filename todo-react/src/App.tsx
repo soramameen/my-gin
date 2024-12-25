@@ -14,7 +14,7 @@ const App: React.FC = () => {
   // 初期ロード時にTodoリストを取得
   useEffect(() => {
     axios
-      .get("http://localhost:8080/todos")
+      .get("https://go-todo-app-a79d54865eb7.herokuapp.com/todos")
       .then((response) => {
         setTodos(response.data);
       })
@@ -28,7 +28,10 @@ const App: React.FC = () => {
     if (!inputTitle) return; // タイトルが空なら何もしない
 
     axios
-      .post("http://localhost:8080/todos", { title: inputTitle, status: false })
+      .post("https://go-todo-app-a79d54865eb7.herokuapp.com/todos", {
+        title: inputTitle,
+        status: false,
+      })
       .then((response) => {
         setTodos([...todos, response.data]); // 新しいタスクをリストに追加
         setInputTitle(""); // 入力欄をクリア
@@ -41,7 +44,7 @@ const App: React.FC = () => {
   // Todoを削除
   const deleteTodo = (id: number) => {
     axios
-      .delete(`http://localhost:8080/todos/${id}`)
+      .delete(`https://go-todo-app-a79d54865eb7.herokuapp.com/todos/${id}`)
       .then(() => {
         setTodos(todos.filter((todo) => todo.id !== id)); // 指定したタスクを削除
       })
@@ -56,7 +59,7 @@ const App: React.FC = () => {
     if (!todo) return;
 
     axios
-      .put(`http://localhost:8080/todos/${id}`, {
+      .put(`https://go-todo-app-a79d54865eb7.herokuapp.com/todos/${id}`, {
         ...todo,
         status: !todo.status,
       })
